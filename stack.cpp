@@ -114,6 +114,7 @@ int Stack::display(void)
     return 0;
 
   int initial_top_index = top_index;
+  cout << "                                       STACK" << endl;
   return display(head, initial_top_index);
 }
 
@@ -129,7 +130,7 @@ int Stack::display(s_node * & head, int top_index)
   for(int i = top_index; i > 0 ; i--)
   {
     cout << endl;
-    cout << "==================================" << endl;
+    cout << "                                       ==================================" << endl;
     head->events[i - 1].display();
     count++;
   }

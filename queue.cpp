@@ -98,6 +98,8 @@ int Queue::display(void)
   if (!rear)
     return 0;
   q_node * end = rear;
+  cout << "                                       QUEUE" << endl;
+  cout << "                                       ==================================" << endl;
   return 1 + display(rear->next, end);
 }
 
@@ -108,10 +110,12 @@ int Queue::display(q_node * current, q_node * end)
   // Base case
   if (current == end)
   {
+    cout << "                                       ==================================" << endl;
     current->event.display();
     return 0;
   }
 
+  cout << "                                       ==================================" << endl;
   current->event.display();
   return 1 + display(current->next, end);
 }

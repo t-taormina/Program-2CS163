@@ -2,17 +2,22 @@
 // June, 2022
 // Program 2- Stack and queues at the Fair
 
+// GITHUB : https://github.com/till-t/Program-2CS163.git
+//
+// things to do:
+//     - create better error messages from main.cpp
+//     - write paragraphs for .h files
+//     - write efficiency paper
+//     - 
 
 // Requirements for test plan
-//
-// GITHUB : https://github.com/till-t/Program-2.git
-
 // Tests Ideas
 // ===================================================================================================
 // Test for event class
 // - check setting an event with user provided input (passed)
 // - check display (passed)
-// - check copying from another event into an event (unchecked)
+// - check copying from another event into an event (passed)
+// - 
 //
 
 #include "event.h"
@@ -46,10 +51,6 @@ int main()
   return 0;
 }
 
-// Function definitions that may go into a header file.
-// ======================================================================================
-
-
 // Displays the menu of functions for the user to choose from.
 // Returns-> the integer value for the menu choice 
 int displayMenu() {
@@ -57,25 +58,33 @@ int displayMenu() {
     std::cout << "                         MENU" << std::endl;
     std::cout << "==================================================================\n";
 
-    std::cout << "1) Add an Event and display.\n";
-    std::cout << "2) Push an event onto the stack..\n";
-    std::cout << "3) Pop an event from the stack..\n";
-    std::cout << "4) Display the stack..\n";
-    std::cout << "5) Enqueue an event..\n";
-    std::cout << "6) Dequeue an event..\n";
-    std::cout << "7) Display queue..\n";
-    std::cout << "8) Exit.\n";
+    std::cout << "STACK OPERATIONS\n";
+    std::cout << "===============================\n";
+    std::cout << "1) Push an event onto the stack\n";
+    std::cout << "2) Pop an event from the stack\n";
+    std::cout << "3) Peek the top element of the stack\n";
+    std::cout << "4) Display entire stack\n";
+    std::cout << endl;
+    std::cout << "QUEUE OPERATIONS\n";
+    std::cout << "===============================\n";
+    std::cout << "5) Enqueue an event\n";
+    std::cout << "6) Dequeue an event\n";
+    std::cout << "7) Peek the next event in the queue\n";
+    std::cout << "8) Display entire queue\n";
+    std::cout << std::endl;
+    std::cout << "0) Exit Program\n";
     std::cout << "Enter: ";
     return 0;
 }
 
+// Returns-> Integer value for the menu choice
 int validate_menu_choice()
 {
   char * menu_choice = new char[SIZE];
   int menu_choice_int = 0;
   get_input(menu_choice);
   int check = convert_character_array_to_int(menu_choice, menu_choice_int);
-  if (menu_choice_int > 8 || menu_choice_int < 1) 
+  if (menu_choice_int > 8 || menu_choice_int < 0) 
     check = 0;
 
   while(!check)
@@ -86,7 +95,7 @@ int validate_menu_choice()
     cout << "Only numbers are accepted." << endl << "Please enter a valid number: ";
     get_input(menu_choice);
     check = convert_character_array_to_int(menu_choice, menu_choice_int);
-    if (menu_choice_int > 8 || menu_choice_int < 1) 
+    if (menu_choice_int > 8 || menu_choice_int < 0) 
       check = 0;
   }
 
@@ -102,35 +111,49 @@ void processChoice (int& flag, int menu_choice, Stack & stack, Queue & queue)
   int proceed = 1;
   switch(menu_choice)
     {
+      // STACK OPERATIONS
       case 1:
-        {
-          Event event;
-          make_event(event);
-
-          int success = event.display();
-          if (!success)
-            std::cout << "Error encountered." << std::endl;
-          break;
-        }
-
-      case 2: 
-        {
+        { 
           Event event;
           make_event(event);
           int success = stack.push(event);
           if (!success)
             std::cout << "Error encountered." << std::endl;
           break;
+
         }
 
-      case 3:
+      case 2: 
         {
           Event returned_event;
           int success = stack.pop(returned_event);
           if (success)
+          {
+            cout << "                                       Popped Event" << endl;
+            cout << "                                       =============================" << endl;
             returned_event.display();
+          }
           else
-            std::cout << "Error encountered." << std::endl;
+            cout << endl << "Empty stack. Try pushing to the stack, and then call pop." << endl;
+
+          cout << endl;
+
+          break;
+        }
+
+      case 3:
+        {
+          Event peeked_event;
+          int success = stack.peek(peeked_event);
+          if (success)
+          {
+            cout << "                                       Peeked Event" << endl;
+            cout << "                                       =============================" << endl;
+            peeked_event.display();
+          }
+          else
+            cout << "Error encountered." << endl;
+            
           break;
         }
 
@@ -138,10 +161,11 @@ void processChoice (int& flag, int menu_choice, Stack & stack, Queue & queue)
         {
           int success = stack.display();
           if(!success)
-            std::cout << "Error encounterd." << std::endl;
+            std::cout << "Empty Stack." << std::endl;
           break;
         }
 
+      // QUEUE OPERATIONS
       case 5: 
         {
           Event event;
@@ -154,17 +178,42 @@ void processChoice (int& flag, int menu_choice, Stack & stack, Queue & queue)
         {
           Event next_event;
           int success = queue.dequeue(next_event);
+          if (success)
+          {
+            cout << "                                       Dequeued Event" << endl;
+            cout << "                                       =============================" << endl;
+            next_event.display();
+          }
+          else
+            cout << "Error encountered." << endl;
+
           break;
         }
 
+      case 7:
+        {
+          Event peeked_event;
+          int success = queue.peek(peeked_event);
+          if (success)
+          {
+            cout << "                                       Peeked Event" << endl;
+            cout << "                                       =============================" << endl;
+            peeked_event.display();
+          }
+          else
+            cout << "Error encountered." << endl;
+          break;
+        }
 
-      case 7: 
+      case 8: 
         {
           int success = queue.display();
+          if(!success)
+            std::cout << "Empty Queue." << std::endl;
           break;
         }
 
-      case 8:
+      case 0:
         {
           std::cout << "Are you sure you want to exit?" << std::endl;
           proceed = no;

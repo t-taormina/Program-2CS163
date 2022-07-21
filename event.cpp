@@ -84,11 +84,11 @@ int Event::copy_event(Event& copy_from)
 // Returns-> 1 if function runs to completion
 int Event::display(void)
 {
-  cout << "Event name: " << name << endl;
-  cout << "Event description: " << description << endl;
-  cout << "Event review: " << review << endl;
-  cout << "Event rating: " << rating << endl;
-  cout << "Event repeatability: ";  
+  cout << "                                       Event name: " << name << endl;
+  cout << "                                       Event description: " << description << endl;
+  cout << "                                       Event review: " << review << endl;
+  cout << "                                       Event rating: " << rating << endl;
+  cout << "                                       Event repeatability: ";
   if (repeatable)
     cout << "Yes" << endl;
   else
