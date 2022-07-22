@@ -6,19 +6,18 @@
 //
 // things to do:
 //     - create better error messages from main.cpp
-//     - write paragraphs for .h files
 //     - write efficiency paper
 //     - 
 
 // Requirements for test plan
-// Tests Ideas
 // ===================================================================================================
 // Test for event class
 // - check setting an event with user provided input (passed)
 // - check display (passed)
 // - check copying from another event into an event (passed)
 // - 
-//
+// Test for stack class
+// Test for class
 
 #include "event.h"
 #include "stack.h"

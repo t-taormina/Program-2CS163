@@ -36,6 +36,9 @@ int Stack::push(Event & event)
 {
   int success = 3;
 
+  if (event.get_name() == nullptr || event.get_description() == nullptr || event.get_review() == nullptr)
+    return 0;
+
   if (!head)
   {
     head = new s_node;
@@ -65,6 +68,7 @@ int Stack::push(Event & event)
 //           2 if the the current s_node remains intact and the top index was decremented
 int Stack::pop(Event & popped_event)
 {
+  // Empty stack
   if(!head)
     return 0;
 
