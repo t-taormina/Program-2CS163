@@ -5,8 +5,10 @@
 #include "stack.h"
 #include <algorithm>
 
+
 // Default constructor
 Stack::Stack() : head(nullptr), top_index(0){}
+
 
 // Deconstructor
 Stack::~Stack() 
@@ -23,6 +25,7 @@ Stack::~Stack()
   }
   return;
 }
+
 
 // Adds an object to the stack
 // Returns-> 0 if any field in the object is set to nullptr
@@ -55,6 +58,7 @@ int Stack::push(Event & event)
   return success;
 }
 
+
 // Used to retrieve the last event on the stack. 
 // Returns-> 0 if the stack is empty
 //           1 if the pop removed a s_node
@@ -82,6 +86,7 @@ int Stack::pop(Event & popped_event)
   return 1;
 }
 
+
 // Retrieves the top event of the stack. Does not alter the stack.
 // Returns-> 0 if the stack is empty
 //           1 if the stack holds 1 event or more
@@ -105,6 +110,7 @@ int Stack::peek(Event & retrieved_event)
   return 1;
 }
 
+
 // Displays all events in the stack. 
 // Wrapper function for recursive call to diplay function.
 // Returns-> the count of events in the stack
@@ -117,6 +123,7 @@ int Stack::display(void)
   cout << "                                       STACK" << endl;
   return display(head, initial_top_index);
 }
+
 
 // Displays all events in the stack recursively. 
 // Recursive call to display function.
